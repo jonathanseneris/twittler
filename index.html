@@ -4,7 +4,7 @@
 <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
-
+    <link rel="stylesheet" href="css/main.css">
     <script src="./jquery-timeago/jquery.timeago.js" type="text/javascript"></script>
     <script src="moment.js"></script>
     <script src="livestamp.js"></script>
@@ -24,11 +24,11 @@
             var $tweet = $('<div></div>');
             $tweet.text(jQuery.timeago(tweet.created_at) + '  @' + tweet.user + ': ' + tweet.message);
             $tweet.appendTo($body);
+            // $tweet.css({ // "font-family": "Courier New, sans-serif", // "background-color": "black", // "color": "white" // })
             console.log(index);
             index -= 1;
         }
         index = 11;
-        // $("#nextButton").css({ // "position": "fixed", // "top": 10, // "left": 50 // });
         loadButton();
 
         function prepender() {
@@ -39,20 +39,37 @@
             while (index < counter) {
                 tweet = streams.home[index];
                 $tweet = $('<div></div>');
-                $tweet.text(jQuery.timeago(tweet.created_at) + '  @' + tweet.user + ': ' + tweet.message);
+                var a = document.createElement('a');
+                var linkText = document.createTextNode(tweet.user);
+                a.appendChild(linkText);
+                a.title = tweet.user;
+                a.href = "#foo";
+                $(a).css({
+                    "background-color": "black",
+                    "color": "white",
+                    "padding": 2
+                });
+                $tweet.html(jQuery.timeago(tweet.created_at) + '  @').css("font-family", "Courier New").append(a).append(': ' + tweet.message);
                 $tweet.prependTo($body);
                 index++;
             }
-            // $($body).prepend("<div id='nextButton'><button id='nextTweets'>Next 10</button></div>");
             console.log(index);
             loadButton();
         }
 
         function loadButton() {
-                $($body).delay(5000).prepend("<header id='nextButton'><button id='nextTweets'>Next 10</button></header>");
-                $("#nextTweets").on("click", function() {
-                    prepender();
-                });
+            $($body).prepend("<header id='nextButton'><button id='nextTweets'>Next 10</button></header>");
+            $("#nextTweets").on("click", function() {
+                prepender();
+            });
+        }
+        $("[href='#foo']").on("click", function(event) {
+            $("dd:nth-child(2)").slideToggle();
+            event.preventDefault();
+        });
+
+        function userPage(user) {
+                console.log(stuff);
             }
             //so figure out the index...
             // allow it to update "next ten" every few seconds
