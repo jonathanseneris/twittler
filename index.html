@@ -12,10 +12,12 @@
 
 <body>
 
+    <!-- ///////////////////to do : fix userpage/next bug. fix timestamp. allow user to tweet. clean up. -->
     <script>
     $(document).ready(function() {
         jQuery("abbr.timeago").timeago();
         jQuery("abbr.livestamp").livestamp();
+        streams.users.shawndrost = [];
         var $body = $('body');
         $body.html('');
         var index = 0;
@@ -24,7 +26,7 @@
         prepender();
 
         function prepender() {
-            if (userToggle == true) {
+            if (userToggle === true) {
                 userPage(author);
             }
             index + 10 < streams.home.length ? counter = index + 10 : counter = streams.home.length;
@@ -35,8 +37,7 @@
                 var a = document.createElement('a');
                 var linkText = document.createTextNode(tweet.user);
                 a.appendChild(linkText);
-                a.title = tweet.user; ///////// so basically, tweets aren't retaining data. solve with array or object?
-                a.index = index;
+                a.title = tweet.user;
                 $(a).addClass(tweet.user);
                 $(a).on("click", function() {
                     userPage(this);
@@ -47,27 +48,10 @@
                 $(a).on("mouseleave", function() {
                     $(this).css("background-color", "black");
                 });
-                $(a).css({
-                    "font-face": "bold",
-                    "color": "white",
-                    "padding": 2,
-                    "background-color": "black",
-                    "margin": 2,
-                    "left": "200px",
-                    "display": "inline-block",
-                    "text-align": "right",
-                });
                 var timeCreated = document.createElement('timeCreated');
                 var timeCreatedText = jQuery.timeago(tweet.created_at);
                 timeCreated.appendChild(document.createTextNode(timeCreatedText));
-                $(timeCreated).css({
-                    "font-style": "italic",
-                    "font-size": 12,
-                    "color": "gray",
-                    "width": "90px",
-                    "margin-left": "100px",
-                    "display": "inline-block"
-                });
+                $(timeCreated).addClass(timeCreated);
                 $tweet.append(timeCreated).append('  @').append(a).append(tweet.message).css("font-family", "Garamond");
                 $tweet.prependTo($body);
                 index++;
@@ -76,9 +60,10 @@
         }
 
         function loadButton() {
-            $($body).prepend("<header id='nextButton'><button id='nextTweets'>Next 10</button></header>");
+            $($body).prepend("<header id='nextButton'><button id='nextTweets'>&uarr;</button></header>");
             $("#nextButton").css({
-                "margin-left": "100px"
+                "margin-left": "100px",
+                "border-width": "thin",
             });
             $("#nextTweets").on("click", function() {
                 prepender();
@@ -86,10 +71,9 @@
         }
 
         function userPage(user) {
-            author = user.title;
-            var allTweets = $($tweet);
+            userToggle === true ? null : author = user.title;
             users.forEach(function(isUser) {
-                isUser === user.title ? null : $("div ." + isUser).parent().slideToggle();
+                isUser === author ? null : $("div ." + isUser).parent().slideToggle();
             });
             userToggle = !userToggle;
         }

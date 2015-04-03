@@ -85,10 +85,24 @@ a {
     font-family: Courier New, sans-serif;
     font-size: 12px;
     text-decoration: none;
+    font-face: bold;
+    color: white;
+    padding: 2px;
+    background-color: black;
+    margin: 2px;
+    left: 200px;
+    display: inline-block;
+    text-align: right
 }
 
 timeCreated {
-    /*font-size: 9px;*/
+    font-style: italic;
+    font-size: 0.75em;
+    color: gray;
+    width: 120px;
+    margin-left: 100px;
+    display: inline-block;
+    text-align: right;
 }
 
 main {
