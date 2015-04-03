@@ -18,22 +18,11 @@
         jQuery("abbr.livestamp").livestamp();
         var $body = $('body');
         $body.html('');
-        var index = streams.home.length - 1;
-        while (index >= 0) {
-            var tweet = streams.home[index];
-            var $tweet = $('<div></div>');
-            $tweet.text(jQuery.timeago(tweet.created_at) + '  @' + tweet.user + ': ' + tweet.message);
-            $tweet.appendTo($body);
-            // $tweet.css({ // "font-family": "Courier New, sans-serif", // "background-color": "black", // "color": "white" // })
-            console.log(index);
-            index -= 1;
-        }
-        index = 11;
-        loadButton();
+        var index = 0;
+        prepender();
 
         function prepender() {
             var counter;
-            console.log("it works");
             index + 10 < streams.home.length ? counter = index + 10 : counter = streams.home.length;
             $("#nextTweets").remove();
             while (index < counter) {
@@ -43,13 +32,26 @@
                 var linkText = document.createTextNode(tweet.user);
                 a.appendChild(linkText);
                 a.title = tweet.user;
-                a.href = "#foo";
-                $(a).css({
-                    "background-color": "black",
-                    "color": "white",
-                    "padding": 2
+                // a.href = "#foo";
+                $(a).on("click", function(input) {
+                    userPage();
                 });
-                $tweet.html(jQuery.timeago(tweet.created_at) + '  @').css("font-family", "Courier New").append(a).append(': ' + tweet.message);
+                $(a).css({
+                    "font-style": "bold",
+                    "color": "white",
+                    "padding": 3,
+                    "background-color": "black",
+                    "margin": 4
+                });
+                var timeCreated = document.createElement('timeCreated');
+                var timeCreatedText = jQuery.timeago(tweet.created_at);
+                timeCreated.appendChild(document.createTextNode(timeCreatedText));
+                $(timeCreated).css({
+                    "font-style": "italic",
+                    "font-size": 12,
+                    "color": "gray"
+                });
+                $tweet.append(timeCreated).append('  @').append(a).append(tweet.message).css("font-family", "Garamond");
                 $tweet.prependTo($body);
                 index++;
             }
@@ -69,11 +71,40 @@
         });
 
         function userPage(user) {
-                console.log(stuff);
+                $("<textarea />").appendTo("#nextTweets")
+                var userDiv = document.createElement('div');
+                userDiv.addClass("userDiv");
+                userDiv.css({
+                    "float": "right",
+                    "background-color": "red"
+                });
+                $(body).append(userDiv);
+                $("#userDiv").animate({
+                    "background-color": "green"
+                }, 3000, function() {
+                    $("#animated").animate({
+                        "top": 0,
+                        "left": 0,
+                        "border-radius": 0
+                    }, 1000);
+                });
             }
-            //so figure out the index...
-            // allow it to update "next ten" every few seconds
-            // also update every timestamp
+            // do something like this
+            //         <section class="shop">
+            //   <h1>Shop</h1>
+            //   <ul style="float:left">
+            //     <li>Hank hats</li><br>
+            //     <li style="background-color:#271C2C">Hank shirts</li><br>
+            //     <li>Hank mousepads</li><br>
+            //     <li>Hank keychains<em style="color:white"> (Sold Out)</em></li>
+            //   </ul>
+            //   <ul style="float:right">
+            //     <li style="background-color:#271C2C">Hank posters</li><br>
+            //     <li>Diet Dr Pepper</li><br>
+            //     <li>Hank stickers</li>
+            //   </ul>
+            // </section>
+            // }
     });
     </script>
 </body>
