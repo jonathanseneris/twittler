@@ -31,10 +31,16 @@
                 var a = document.createElement('a');
                 var linkText = document.createTextNode(tweet.user);
                 a.appendChild(linkText);
-                a.title = tweet.user;
-                // a.href = "#foo";
-                $(a).on("click", function(input) {
-                    userPage();
+                a.title = tweet.user; ///////// so basically, tweets aren't retaining data. solve with array or object?
+                a.index = index;
+                $(a).on("click", function() {
+                    userPage(this);
+                });
+                $(a).on("mouseenter", function() {
+                    $(this).css("background-color", "orange");
+                });
+                $(a).on("mouseleave", function() {
+                    $(this).css("background-color", "black");
                 });
                 $(a).css({
                     "font-style": "bold",
@@ -53,6 +59,7 @@
                 });
                 $tweet.append(timeCreated).append('  @').append(a).append(tweet.message).css("font-family", "Garamond");
                 $tweet.prependTo($body);
+                // $tweet.addClass(tweet.user);
                 index++;
             }
             console.log(index);
@@ -65,46 +72,14 @@
                 prepender();
             });
         }
-        $("[href='#foo']").on("click", function(event) {
-            $("dd:nth-child(2)").slideToggle();
-            event.preventDefault();
-        });
 
         function userPage(user) {
-                $("<textarea />").appendTo("#nextTweets")
-                var userDiv = document.createElement('div');
-                userDiv.addClass("userDiv");
-                userDiv.css({
-                    "float": "right",
-                    "background-color": "red"
-                });
-                $(body).append(userDiv);
-                $("#userDiv").animate({
-                    "background-color": "green"
-                }, 3000, function() {
-                    $("#animated").animate({
-                        "top": 0,
-                        "left": 0,
-                        "border-radius": 0
-                    }, 1000);
-                });
-            }
-            // do something like this
-            //         <section class="shop">
-            //   <h1>Shop</h1>
-            //   <ul style="float:left">
-            //     <li>Hank hats</li><br>
-            //     <li style="background-color:#271C2C">Hank shirts</li><br>
-            //     <li>Hank mousepads</li><br>
-            //     <li>Hank keychains<em style="color:white"> (Sold Out)</em></li>
-            //   </ul>
-            //   <ul style="float:right">
-            //     <li style="background-color:#271C2C">Hank posters</li><br>
-            //     <li>Diet Dr Pepper</li><br>
-            //     <li>Hank stickers</li>
-            //   </ul>
-            // </section>
-            // }
+            console.log($(user).parent());
+            console.log(user.title)
+            var allTweets = $($tweet);
+            // $($tweet).css("display", "none");
+            $($body).children(allTweets).find(user).parent().slideToggle(); /// user isn't right. figure out what is and we're golden.
+        }
     });
     </script>
 </body>
