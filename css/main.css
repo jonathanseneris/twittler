@@ -1,8 +1,7 @@
 /*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
 
 html {
-    /*font-size: 1em;*/
-    
+    font-size: 1em;
     line-height: 1.5;
     background-color: white;
 }
@@ -13,11 +12,12 @@ html {
 }
 
 header {
-    font-family: Georgia, sans-serif;
+    font-family: Georgia;
     /*font-size: 2em;*/
     
     text-decoration: none;
-    font-face: bold;
+    /*font-style: bold;   this never works. why?   */
+    
     color: black;
     padding: 2px;
     background-color: white;
@@ -36,10 +36,15 @@ header {
     border-bottom: 5px solid black;
 }
 
+.actualLine {
+    color: red;
+}
+
 a {
     font-family: Courier New;
-    font-size: 0.8em;
-    font-style: bold;
+    /*font-size: 0.8em;      shouldn't be necessary*/
+    /*font-style: bold;     fix? */
+    
     color: white;
     padding: 2px;
     /*height: 30px;*/
@@ -51,60 +56,14 @@ a {
     text-align: right
 }
 
-timeCreated {
+.livestamp {
     font-family: Garamond;
     font-style: italic;
-    font-size: 0.75em;
+    /*font-size: 0.75em;*/
+    
     color: gray;
     width: 120px;
     margin-left: 200px;
     display: inline-block;
     text-align: right;
-}
-/* ==========================================================================
-   Media Queries
-   ========================================================================== */
-
-.hidden {
-    display: none !important;
-    visibility: hidden;
-}
-
-.visuallyhidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-}
-
-.visuallyhidden.focusable:active,
-.visuallyhidden.focusable:focus {
-    clip: auto;
-    height: auto;
-    margin: 0;
-    overflow: visible;
-    position: static;
-    width: auto;
-}
-
-.invisible {
-    visibility: hidden;
-}
-
-.clearfix:before,
-.clearfix:after {
-    content: " ";
-    display: table;
-}
-
-.clearfix:after {
-    clear: both;
-}
-
-.clearfix {
-    *zoom: 1;
 }
