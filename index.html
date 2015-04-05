@@ -13,9 +13,9 @@
 
 <body>
 
-    <!-- ///////////////////to do : fix timestamp. allow user to tweet. clean up. don't make functions in a loop-->
+    <!-- ///////////////////to do : clean up. don't make functions in a loop-->
     <!-- prettify. maybe make font size relative to width? that'd be cool. -->
-    <!-- maybe it should be a scrollable windows with an input box at the bottom to add your tweets -->
+    <!-- maybe it should be a scrollable windows with an input box at the bottom to add your tweets? some kind of animation instead -->
     <script>
     $(document).ready(function() {
         var $body = $('body');
@@ -27,8 +27,6 @@
         //
         window.visitor = "player1";
         streams.users.player1 = [];
-        // window.streams.users.push = "player1";
-        // users.push("player1");
         writeTweet("just checking that this works");
         //
         function prepender(isTen) {
@@ -49,6 +47,7 @@
                 a.appendChild(linkText);
                 a.title = tweet.user;
                 $(a).addClass(tweet.user);
+                var styleMultiplier = 10 / (tweet.user.length);
                 $(a).css("font-size", styleMultiplier + "em");
                 $(a).on("click", function() { // these functions only seem to bind when they're made here.
                     userPage(this);
@@ -63,12 +62,13 @@
                 timeCreated = timeCreated.toISOString();
                 $tweet.prependTo($body); //.css("opacity", 0);
                 $tweet.append('<span class="livestamp" id=index data-livestamp="' + timeCreated + '"></span>');
-                var styleMultiplier = styleMultiplier = 10 / (timeCreated.length);
-                $(".livestamp #" + index).css("font-size", styleMultiplier + "em");
+                styleMultiplier = styleMultiplier = 10 / (timeCreated.length);
+                // $(".livestamp #" + index).css("font-size", "0.5em");
+                styleMultiplier = 10 / (a.length);
                 $tweet.append('<span class="at">  @</span>').append(a);
-                $tweet.append('<span class="message">' + tweet.message + '</span>');
-                styleMultiplier = styleMultiplier = 150 / (tweet.message.length);
-                $($tweet).css("font-size", styleMultiplier);
+                $tweet.append('<span class="message" id = "' + index + '">' + tweet.message + '</span>');
+                styleMultiplier = 40 / (tweet.message.length);
+                $("#" + index + ".message").css("font-size", styleMultiplier + "em");
                 // $tweet.animate({ // opacity: 100  //animating creates a huge lag with userpage
                 // }, 30000);
                 index++;

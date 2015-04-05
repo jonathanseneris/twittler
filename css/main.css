@@ -1,7 +1,6 @@
 /*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
 
 html {
-    font-size: 1em;
     line-height: 1.5;
     background-color: white;
 }
@@ -12,7 +11,7 @@ html {
 }
 
 header {
-    font-family: Georgia;
+    font-family: Courier;
     /*font-size: 2em;*/
     
     text-decoration: none;
@@ -36,15 +35,14 @@ header {
     border-bottom: 5px solid black;
 }
 
-.actualLine {
-    color: red;
+.message {
+    font-family: Courier New;
+    font-weight: 100;
 }
 
 a {
     font-family: Courier New;
-    /*font-size: 0.8em;      shouldn't be necessary*/
-    /*font-style: bold;     fix? */
-    
+    font-weight: 600;
     color: white;
     padding: 2px;
     /*height: 30px;*/
@@ -59,8 +57,7 @@ a {
 .livestamp {
     font-family: Garamond;
     font-style: italic;
-    /*font-size: 0.75em;*/
-    
+    font-size: 0.75em;
     color: gray;
     width: 120px;
     margin-left: 200px;
