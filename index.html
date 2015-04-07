@@ -8,25 +8,41 @@
     <script src="moment.js"></script>
     <script src="livestamp.js"></script>
     <script type="text/javascript">
-    var index = 0,
-        userToggle = false,
-        counter, wasTrue, author;
     </script>
 </head>
 
 <body>
-
-    <!-- ///////////////////to do : make header nicer. fix userpage/loadnew bug. don't make functions in a loop-->
-    <!-- maybe it should be a scrollable windows with an input box at the bottom to add your tweets? some kind of animation instead -->
     <script>
     $(document).ready(function() {
-        var $body = $('body');
+        var index = 0,
+            userToggle = false,
+            counter, wasTrue, author,
+            mouseleaver = function() {
+                $(this).css("background-color", "black");
+            },
+            mouseenterer = function() {
+                $(this).css("background-color", "#FF005E");
+            },
+            userPager = function() {
+                userPage(this);
+            },
+            LoadButtons = function() {
+                updateInterval = 0;
+                $($body).prepend("<header id='headRow'>twittler <button id='ten' class='nextTweets'> [&uarr;] </button><button id='all' class='nextTweets'> [&uarr;&uarr;]</button><input type='text' id='tweetBox' placeholder=' What&apos;s on your mind? '/><button id='playerOneTweet' >twittle</button></header>");
+                $(".nextTweets").on("click", function() {
+                    var isTen = this.id;
+                    prepender(isTen);
+                })
+                $("#playerOneTweet").click(function() {
+                    twittle();
+                });
+            },
+            $body = $('body');
         $body.html('');
-        prepender(); // initial load
         //
         window.visitor = "player1";
         streams.users.player1 = [];
-        writeTweet("just checking that this works"); //testing user tweet
+        prepender(); // initial load
         //
         function prepender(isTen) {
             if (userToggle === true) { //come out of userpage before updating
@@ -48,89 +64,52 @@
                 $(a).addClass(tweet.user);
                 var styleMultiplier = 10 / (tweet.user.length);
                 $(a).css("font-size", styleMultiplier + "em");
-                $(a).on("click", function() { // these functions only seem to bind when they're made here.
-                    userPage(this);
-                });
-                $(a).on("mouseenter", function() {
-                    $(this).css("background-color", "orange");
-                });
-                $(a).on("mouseleave", function() {
-                    $(this).css("background-color", "black");
-                });
+                $(a).on("click", userPager);
+                $(a).on("mouseenter", mouseenterer);
+                $(a).on("mouseleave", mouseleaver);
                 var timeCreated = tweet.created_at;
                 timeCreated = timeCreated.toISOString();
-                $tweet.prependTo($body); //.css("opacity", 0);
+                $tweet.prependTo($body);
                 $tweet.append('<span class="livestamp" id=index data-livestamp="' + timeCreated + '"></span>');
-                styleMultiplier = styleMultiplier = 10 / (timeCreated.length);
-                // $(".livestamp #" + index).css("font-size", "0.5em");
-                styleMultiplier = 10 / (a.length);
                 $tweet.append('<span class="at">  @</span>').append(a);
                 $tweet.append('<span class="message" id = "' + index + '">' + tweet.message + '</span>');
-                styleMultiplier = 40 / (tweet.message.length);
+                styleMultiplier = 50 / (tweet.message.length);
                 $("#" + index + ".message").css("font-size", styleMultiplier + "em");
-                // $tweet.animate({ // opacity: 100  //animating creates a huge lag with userpage
-                // }, 30000);
                 index++;
             }
-            if (wasTrue === true) { //works if you pass it once, but not more than once. needs a variable - areWeInUserPage
+            if (wasTrue === true) {
                 userToggle = !userToggle;
                 userPage(author);
                 wasTrue = !wasTrue;
                 userToggle = !userToggle;
             }
+            livestampGlobal.update();
             LoadButtons();
         }
 
-        function LoadButtons() {
-            updateInterval = 0;
-            $($body).prepend("<header id='headRow'>Twittler <button id='ten' class='nextTweets'>&uarr;</button><button id='all' class='nextTweets'>&uarr;&uarr;</button><input type='text' placeholder='Got something to say?'/><button id='playerOneTweet' >twittle</button></header>");
-            $(".nextTweets").on("click", function() {
-                var isTen = this.id;
-                prepender(isTen);
-            });
-            $("#playerOneTweet").click(function() {
-                twittle();
-            });
-            updateInterval = 1000;
-        }
-
         function userPage(user) {
-            userToggle === true ? null : author = user.title;
+            if (userToggle !== true) {
+                author = user.title;
+            }
             users.push("player1"); //if users isn't there, they don't get filtered out of userpage. if they are, they get auto-tweets.
             users.forEach(function(isUser) {
-                isUser === author ? null : $("div ." + isUser).parent().slideToggle();
+                if (isUser !== author) {
+                    $("div ." + isUser).parent().slideToggle();
+                }
             });
             users.pop();
             userToggle = !userToggle;
         }
 
-        function twittle() { // move this input field to the right.   // only allows username 'player1' for now. //clear input box
+        function twittle() {
             var myTwit = $('input:text').val();
+            myTwit = " " + myTwit;
             writeTweet(myTwit);
-        };
+            $('#tweetBox').val('');
+            prepender();
+        }
     });
     </script>
 </body>
 
 </html>
-<!-- What's Already Here
-
-This is a mostly-empty repo, with a file that creates some data that represents twitter users and their tweets. It's the data you would expect to see if you had created a twitter account and followed a few people. (More tweets appear over time.)
-
-That file is called data_generator.js. You don't need to understand the code that's in it, but here's what it does:
-
-Creates two global variables, users and streams.
-users is an array of strings -- all the usernames that you're following.
-streams is an object with two properties, users and home.
-streams.home is an array of all tweets from all the users you're following.
-streams.users is an object with properties for each user. streams.users.shawndrost has all of shawndrost's tweets.
-Kicks off a periodic process that puts more data in streams.
-You'll mostly be working in the javascript block of index.html. Note: The generated tweets will be displayed in reverse chronological order.
-
-Basic Requirements:
-
-Show the user new tweets somehow. (You can show them automatically as they're created, or create a button that displays new tweets.)
-Display the timestamps of when the tweets were created.
-Design your interface so that you want to look at and use the product you're making.
-Allow the user to click on a username to see that user's timeline.
-Extra credit:

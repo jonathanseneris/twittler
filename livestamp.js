@@ -1,6 +1,6 @@
 // Livestamp.js / v1.1.2 / (c) 2012 Matt Bradley / MIT License
 (function($, moment) {
-    var updateInterval = 20,
+    var updateInterval = 20000,
         paused = false,
         initialRun = true;
     $livestamps = $([]),
@@ -25,10 +25,8 @@
         },
         run = function() {
             if (paused) return;
-            initialRun ? updateInterval = 0 : updateInterval = 2000; //prevents initial lag
             livestampGlobal.update();
             setTimeout(run, updateInterval);
-            initialRun = false;
         },
         livestampGlobal = {
             update: function() {
