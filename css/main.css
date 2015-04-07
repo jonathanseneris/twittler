@@ -24,14 +24,17 @@ header {
     text-align: left;
 }
 
+.hashtag {
+    background: #FFED5F;
+    /*blue 0DAAFF red FF005E green 85FF00*/
+}
+
 #headRow {
     margin-left: 12%;
+    width: 50%;
     border-bottom: 1px solid gray;
     /*hidden, dotted, dashed, solid, double, groove, ridge, inset, outset*/
     /*border-bottom: 1px solid #FF005E;*/
-    /*#0DAAFF;*/
-    
-    width: 50%;
 }
 
 .message {

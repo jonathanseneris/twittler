@@ -23,11 +23,10 @@
             mouseenterer = function() {
                 $(this).css("background-color", "#FF005E");
             },
-            userPager = function() {
+            userPager = function() { // so as not to make functions in a loop
                 userPage(this);
             },
             LoadButtons = function() {
-                updateInterval = 0;
                 $($body).prepend("<header id='headRow'><span id='trademark'>twittler</span><button id='ten' class='nextTweets'> [&uarr;] </button><button id='all' class='nextTweets'> [&uarr;&uarr;]</button><input type='text' id='tweetBox' placeholder=' What&apos;s on your mind? '/><button id='playerOneTweet' >twittle</button></header>");
                 $(".nextTweets").on("click", function() {
                     var isTen = this.id;
@@ -42,9 +41,16 @@
                     }
                 });
             },
+            hashtag_regexp = /#([a-zA-Z0-9]+)/g, // hashtag highlighting modified from this SO answer http://stackoverflow.com/a/4913601
+            linkHashtags = function(text) {
+                return text.replace(
+                    hashtag_regexp,
+                    '<span class="hashtag" href="http://twitter.com/#search?q=$1">#$1</span>'
+                );
+            },
             $body = $('body');
+        //end declare variables
         $body.html('');
-        //
         window.visitor = "player1";
         streams.users.player1 = [];
         prepender(); // initial load
@@ -77,7 +83,7 @@
                 $tweet.prependTo($body);
                 $tweet.append('<span class="livestamp" id=index data-livestamp="' + timeCreated + '"></span>');
                 $tweet.append('<span class="at">  @</span>').append(a);
-                $tweet.append('<span class="message" id = "' + index + '">' + tweet.message + '</span>');
+                $tweet.append('<span class="message" id = "' + index + '">' + linkHashtags(tweet.message) + '</span>');
                 styleMultiplier = 50 / (tweet.message.length);
                 $("#" + index + ".message").css("font-size", styleMultiplier + "em");
                 index++;
@@ -91,12 +97,17 @@
             livestampGlobal.update();
             LoadButtons();
         }
+        $(document).ready(function() {
+            $('p').each(function() {
+                $(this).html(linkHashtags($(this).html()));
+            });
+        });
 
         function userPage(user) {
             if (userToggle !== true) {
                 author = user.title;
             }
-            users.push("player1"); //if users isn't there, they don't get filtered out of userpage. if they are, they get auto-tweets.
+            users.push("player1"); //if user isn't there, they don't get filtered. if they are, they get auto-tweets. so push and pop.
             users.forEach(function(isUser) {
                 if (isUser !== author) {
                     $("div ." + isUser).parent().slideToggle();
