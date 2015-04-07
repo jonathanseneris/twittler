@@ -28,7 +28,7 @@
             },
             LoadButtons = function() {
                 updateInterval = 0;
-                $($body).prepend("<header id='headRow'>twittler <button id='ten' class='nextTweets'> [&uarr;] </button><button id='all' class='nextTweets'> [&uarr;&uarr;]</button><input type='text' id='tweetBox' placeholder=' What&apos;s on your mind? '/><button id='playerOneTweet' >twittle</button></header>");
+                $($body).prepend("<header id='headRow'><span id='trademark'>twittler</span><button id='ten' class='nextTweets'> [&uarr;] </button><button id='all' class='nextTweets'> [&uarr;&uarr;]</button><input type='text' id='tweetBox' placeholder=' What&apos;s on your mind? '/><button id='playerOneTweet' >twittle</button></header>");
                 $(".nextTweets").on("click", function() {
                     var isTen = this.id;
                     prepender(isTen);

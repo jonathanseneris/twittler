@@ -22,12 +22,14 @@ header {
     position: relative;
     display: inline-block;
     text-align: left;
-    width: 60%;
 }
 
 #headRow {
     margin-left: 12%;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #FF005E;
+    /*#0DAAFF;*/
+    
+    width: 50%;
 }
 
 .message {
@@ -35,14 +37,24 @@ header {
     font-weight: 100;
 }
 
+#trademark {
+    display: inline;
+    font-size: 0.2em;
+    font-style: italic;
+    padding: 18px 25px 8px 14px;
+    background: white;
+    margin: 0px 7px 0px 15px;
+    /*color: #FF005E;*/
+}
+
 input {
-    font-family: courier new;
+    font-family: Courier new;
     font-size: 1.5em;
     font-weight: 100;
     border-style: solid;
     border-width: 0px 0px 1px 0px;
-    border-color: lightgray;
-    width: 47%;
+    border-color: white;
+    width: 55%;
     color: #0DAAFF;
 }
 
@@ -53,9 +65,7 @@ a {
     padding: 2px;
     background-color: black;
     margin: 2px;
-    left: 200px;
     display: inline-block;
-    text-align: right
 }
 
 button {
@@ -70,8 +80,6 @@ button {
 
 button:hover {
     background: #85FF00;
-    /*//#3d3d3d; */
-    
     text-decoration: none;
 }
 
@@ -84,4 +92,24 @@ button:hover {
     margin-left: 200px;
     display: inline-block;
     text-align: right;
+}
+
+::-webkit-input-placeholder {
+    color: #E0E0E0;
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    
+    color: #E0E0E0;
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    
+    color: #E0E0E0;
+}
+
+:-ms-input-placeholder {
+    color: #E0E0E0;
 }
