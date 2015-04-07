@@ -8,6 +8,9 @@
     <script src="moment.js"></script>
     <script src="livestamp.js"></script>
     <script type="text/javascript">
+    var index = 0,
+        userToggle = false,
+        counter, wasTrue, author;
     </script>
 </head>
 
@@ -19,20 +22,17 @@
     $(document).ready(function() {
         var $body = $('body');
         $body.html('');
-        var index = 0,
-            userToggle = false,
-            counter, author, wasTrue;
-        prepender();
+        prepender(); // initial load
         //
         window.visitor = "player1";
         streams.users.player1 = [];
-        writeTweet("just checking that this works");
+        writeTweet("just checking that this works"); //testing user tweet
         //
         function prepender(isTen) {
             if (userToggle === true) { //come out of userpage before updating
                 userPage(author);
                 wasTrue = true; // if in userpage, display only those user's new tweets
-            }
+            } else(wasTrue = false);
             isTen === "ten" ? counter = index + 10 : counter = streams.home.length;
             if (index + 10 >= streams.home.length) {
                 counter = streams.home.length;
@@ -76,6 +76,7 @@
                 userToggle = !userToggle;
                 userPage(author);
                 wasTrue = !wasTrue;
+                userToggle = !userToggle;
             }
             LoadButtons();
         }
@@ -133,25 +134,3 @@ Display the timestamps of when the tweets were created.
 Design your interface so that you want to look at and use the product you're making.
 Allow the user to click on a username to see that user's timeline.
 Extra credit:
-
-Show when the tweets were created in a human-friendly way (eg "10 minutes ago"). You'll want to find and use a library for this.
-Allow the user to tweet. (This is going to require you to understand a little more about data_generator.js, but you shouldn't need to modify anything.) -->
-
-<!-- $(document).ready(function() {
-  $(".tour").on("mouseenter", function() {
-    $(this).css("background-color", "#252b30");
-  });
-});
- -->
-
-<!-- $(document).ready(function() {
-  $(".tour").on("mouseenter", function() {
-    $(this).addClass("highlight");
-    $(this).find(".per-night").animate({"top": "-14px","opacity": "1"}, "fast");
-  });
-  $(".tour").on("mouseleave", function() {
-    $(this).removeClass("highlight");
-      $(this).find(".per-night").animate({"top": "0px","opacity": "0"}, "fast");
-  });
-});
- -->
