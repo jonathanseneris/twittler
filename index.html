@@ -32,9 +32,14 @@
                 $(".nextTweets").on("click", function() {
                     var isTen = this.id;
                     prepender(isTen);
-                })
+                });
                 $("#playerOneTweet").click(function() {
                     twittle();
+                });
+                $("input").keypress(function(event) {
+                    if (event.which === 13) {
+                        twittle();
+                    }
                 });
             },
             $body = $('body');

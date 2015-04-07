@@ -2,7 +2,7 @@
 
 html {
     line-height: 1.5;
-    background-color: #FCFAFA;
+    background-color: #FCFCFC;
 }
 
 ::selection {
@@ -26,7 +26,9 @@ header {
 
 #headRow {
     margin-left: 12%;
-    border-bottom: 1px solid #FF005E;
+    border-bottom: 1px solid gray;
+    /*hidden, dotted, dashed, solid, double, groove, ridge, inset, outset*/
+    /*border-bottom: 1px solid #FF005E;*/
     /*#0DAAFF;*/
     
     width: 50%;
@@ -41,9 +43,11 @@ header {
     display: inline;
     font-size: 0.2em;
     font-style: italic;
-    padding: 18px 25px 8px 14px;
+    padding: 4px 19px 4px 19px;
     background: white;
+    border: 1px solid black;
     margin: 0px 7px 0px 15px;
+    /*box-shadow: -2px 2px gray;*/
     /*color: #FF005E;*/
 }
 
@@ -73,7 +77,8 @@ button {
     color: #ffffff;
     font-size: 1em;
     padding: 9px 5px 5px 5px;
-    background: #d1d1d1;
+    background: #e1e1e1;
+    border: 1px solid black;
     text-decoration: none;
     border: none;
 }
