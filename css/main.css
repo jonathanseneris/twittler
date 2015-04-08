@@ -17,8 +17,7 @@ header {
     font-weight: 500;
     color: black;
     padding: 2px;
-    margin: 2px;
-    left: 25px;
+    margin: 4px;
     position: relative;
     display: inline-block;
     text-align: left;
@@ -30,8 +29,8 @@ header {
 }
 
 #headRow {
-    margin-left: 100px;
-    width: 710px;
+    margin-left: 125px;
+    width: 760px;
     border-bottom: 1px solid gray;
     /*hidden, dotted, dashed, solid, double, groove, ridge, inset, outset*/
     /*border-bottom: 1px solid #FF005E;*/
@@ -46,10 +45,10 @@ header {
     display: inline;
     font-size: 0.2em;
     font-style: italic;
-    padding: 4px 19px 4px 19px;
+    padding: 4px 12px 4px 12px;
     background: white;
     border: 1px solid black;
-    margin: 0px 25px 0px 20px;
+    margin: 0px 20px 0px 25px;
     /*box-shadow: -2px 2px gray;*/
     /*color: #FF005E;*/
 }
@@ -81,15 +80,16 @@ button {
     font-size: 1em;
     padding: 9px 5px 5px 5px;
     background: #e1e1e1;
-    border: 1px solid black;
     text-decoration: none;
     border: none;
+    margin: 0px;
 }
 
 button:hover {
     background: #85FF00;
     text-decoration: none;
 }
+
 .tweetLine {
     width: 850px;
 }
