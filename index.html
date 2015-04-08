@@ -119,6 +119,9 @@
 
         function twittle() {
             var myTwit = $('input:text').val();
+            if (myTwit === "") {
+                return;
+            }
             myTwit = " " + myTwit;
             writeTweet(myTwit);
             $('#tweetBox').val('');
