@@ -67,7 +67,7 @@
             $("#headRow").remove();
             while (index < counter) {
                 tweet = streams.home[index];
-                $tweet = $('<div></div>');
+                $tweet = $('<div class="tweetLine"></div>');
                 var a = document.createElement('a');
                 var linkText = document.createTextNode(tweet.user);
                 a.appendChild(linkText);

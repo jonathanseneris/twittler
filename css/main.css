@@ -18,7 +18,7 @@ header {
     color: black;
     padding: 2px;
     margin: 2px;
-    left: 4.5%;
+    left: 25px;
     position: relative;
     display: inline-block;
     text-align: left;
@@ -30,8 +30,8 @@ header {
 }
 
 #headRow {
-    margin-left: 12%;
-    width: 50%;
+    margin-left: 100px;
+    width: 710px;
     border-bottom: 1px solid gray;
     /*hidden, dotted, dashed, solid, double, groove, ridge, inset, outset*/
     /*border-bottom: 1px solid #FF005E;*/
@@ -49,7 +49,7 @@ header {
     padding: 4px 19px 4px 19px;
     background: white;
     border: 1px solid black;
-    margin: 0px 7px 0px 15px;
+    margin: 0px 25px 0px 20px;
     /*box-shadow: -2px 2px gray;*/
     /*color: #FF005E;*/
 }
@@ -61,7 +61,7 @@ input {
     border-style: solid;
     border-width: 0px 0px 1px 0px;
     border-color: white;
-    width: 55%;
+    width: 400px;
     color: #0DAAFF;
 }
 
@@ -90,6 +90,9 @@ button:hover {
     background: #85FF00;
     text-decoration: none;
 }
+.tweetLine {
+    width: 850px;
+}
 
 .livestamp {
     font-family: Garamond;
@@ -97,7 +100,7 @@ button:hover {
     font-size: 0.75em;
     color: gray;
     width: 120px;
-    margin-left: 200px;
+    margin-left: 100px;
     display: inline-block;
     text-align: right;
 }
